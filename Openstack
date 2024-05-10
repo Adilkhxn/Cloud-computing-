@@ -1,0 +1,47 @@
+After successful installation of ubuntu start]Openstack installation
+Execute below steps in terminal:
+
+sudo su 
+
+apt update -y && apt upgrade -y
+
+sudo reboot
+
+sudo useradd -s /bin/bash -d /opt/stack -m stack 
+
+echo "stack ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/stack
+sudo su - stack
+
+If git not installed:
+
+sudo apt install git -y
+
+git clone https://github.com/openstack-dev/devstack.git -b stable/pike devstack/
+
+cd devstack/
+
+sudo ifconfig
+
+If it did not work:
+
+sudo apt install net-tools
+
+cat > local.conf <<EOF
+[local | localrc]]
+ADMIN_PASSWORD=secret
+DATABASE_PASSWORD=\$ADMIN_PASSWORD
+RABBIT PASSWORD=\$ADMIN_PASSWORD
+SERVICE_PASSWORD=\$ADMIN_PASSWORD
+HOST_IP=10.0.2.15
+RECLONE=yes
+EOF
+
+./stack.sh
+
+If stack.sh failed with permission error:
+
+FORCE=yes ./stack.sh
+
+After succesful installation of Openstack
+
+http://10.0.2.15/dashboard
