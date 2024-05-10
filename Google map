@@ -1,0 +1,63 @@
+1. First of all we need to create an Java Web Application with any name, let it be GoogleMap
+here usingNetbeansIDE
+2. Thecodeinsidetheinput.jspwillbesimilartothisinput.jspInput.jsp
+<%@pagecontentType="text/html"pageEncoding="UTF-8"%>
+<!DOCTYPEhtml>
+<html>
+<head>
+<metahttp-equiv="Content-Type"content="text/html;charset=UTF-8">
+<title>JSPPage</title>
+</head>
+<body>
+<formaction="index.jsp">
+<pre>
+Enter latitude:<input type="text" name="t1"
+/>Enterlongitude:<inputtype="text"name="t2"/>
+<inputtype="submit"value="Show"/>
+</pre>
+</form>
+</body>
+</html>
+3. Before running the application we need the Google API key.The steps are shown here: - Visit
+GoogleAPIsConsole(https://console.developers.google.com,youhavetologinwithyourGoogleaccount
+).
+2
+- Createa newAPIProject.
+- Enterthenametoyourproject.
+EnabletheGoogleMapsAPIV3
+4. Createanotherfileindex.jsp
+Index.jsp
+<%@pagecontentType="text/html"pageEncoding="UTF-8"%>
+<!DOCTYPEhtml>
+<html>
+<head>
+<style>
+#map{
+height: 400px;width:100%;
+}
+</style>
+</head>
+<body>
+<%
+doublelati=Double.parseDouble(request.getParameter("t1"));
+doublelongi=Double.parseDouble(request.getParameter("t2"));
+%>
+<h3>GoogleMaps</h3>
+<divid="map"></div>
+<script type="text/javascript">
+functioninitMap(){
+varinfo={lat:<%=lati%>,lng:<%=longi%>};
+varmap=newgoogle.maps.Map(document.getElementById('map'),
+{
+zoom:4, center:info
+});
+var marker = new google.maps.Marker({position:info,
+map:map
+});
+}
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=put API key
+&callback=initMap"></script>
+</script>
+</body>
+</html>
